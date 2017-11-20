@@ -35,6 +35,29 @@ function importSample(path) {
 }
 
 /**
+ * Given a 'hh:mm' string, return an integer summing up the total minutes
+ * @param {string} text
+ */
+function hoursToMinutes(text) {
+  let [hours, minutes] = text.split(':');
+  hours = parseInt(hours, 10);
+  minutes = parseInt(minutes, 10);
+  return hours * 60 + minutes;
+}
+
+/**
+ * Given a number of minutes, return a string formatted such as 'hh:mm'
+ * @param {number} total
+ */
+function minutesToString(total) {
+  let hours = Math.floor(total / 60);
+  hours = (hours < 10 ? '0' : '') + hours;
+  let minutes = total % 60;
+  minutes = (minutes < 10 ? '0' : '') + minutes;
+  return `${hours}:${minutes}`;
+}
+
+/**
  * Log an information message
  * @param {string} text
  */
@@ -59,6 +82,8 @@ function success(text) {
 }
 
 module.exports.importSample = importSample;
+module.exports.hoursToMinutes = hoursToMinutes;
+module.exports.minutesToString = minutesToString;
 module.exports.info = info;
 module.exports.error = error;
 module.exports.success = success;

@@ -23,10 +23,16 @@ const database = new Database(config.database);
     const entries = await util.importSample(path.join(__dirname, './sample.txt'))
 
     util.info('Inserting entries');
-    entries.forEach(({ name, hours }) => database.query(
-      'INSERT INTO restaurants(name, hours) VALUES ($1, $2)',
-      [name, hours]
-    ));
+    entries.forEach(({ name, hours }) => {
+        for (let [key, value] of Object.entries(hours)) {
+          hours[key] = util.hoursToMinutes(value);
+        }
+
+        database.query(
+          'INSERT INTO restaurants(name, hours) VALUES ($1, $2)',
+          [name, hours]
+        );
+    });
 
     util.success('Database successfully bootstrapped!');
   } catch (e) {

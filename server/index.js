@@ -1,9 +1,12 @@
 const express = require('express');
-const app = express();
 const Database = require('./database/client');
+const router = require('./router');
 const config = require('../config.json');
 
 const database = new Database(config.database);
+
+const app = express();
+app.use('/', router);
 
 // Once database is connected, we run the server
 database.connect(() => {

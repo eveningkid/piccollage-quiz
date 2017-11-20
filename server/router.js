@@ -2,15 +2,14 @@ const { Router } = require('express');
 const bodyParser = require('body-parser');
 
 const router = Router();
-const jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-
-router.get('/restaurants', jsonParser, (req, res) => {
-  res.send({ restaurants: [] });
+router.post('/restaurants', urlencodedParser, (req, res) => {
+  res.json({ restaurants: [] });
 });
 
 module.exports = router;

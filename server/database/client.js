@@ -1,4 +1,3 @@
-const { database } = require('../../config.json');
 const { Client } = require('pg');
 
 class Database {
@@ -12,9 +11,13 @@ class Database {
     });
   }
 
-  connect() {
+  connect(callback) {
     return this.client
       .connect()
+      .then(() => {
+        console.log('PostgreSQL: Connected to database');
+        callback();
+      })
       .catch((err) => console.error('PostgreSQL: Connection error'));
   }
 
@@ -27,4 +30,4 @@ class Database {
   }
 }
 
-module.exports = new Database(database);
+module.exports = Database;

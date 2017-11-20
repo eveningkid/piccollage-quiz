@@ -5,5 +5,8 @@
     "USER": "local username",
     "PASSWORD": "",
     "DATABASE": "restaurants"
+  },
+  "server": {
+    "PORT": 3001
   }
 }

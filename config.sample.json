@@ -1,0 +1,9 @@
+{
+  "database": {
+    "HOST": "localhost",
+    "PORT": 5432,
+    "USER": "local username",
+    "PASSWORD": "",
+    "DATABASE": "restaurants"
+  }
+}

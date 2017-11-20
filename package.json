@@ -1,0 +1,12 @@
+{
+  "name": "piccollage",
+  "version": "1.0.0",
+  "description": "Internal Interview Quiz",
+  "main": "server/index.js",
+  "author": "eveningkid <arn.dellinger@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pg": "^7.4.0"
+  }
+}

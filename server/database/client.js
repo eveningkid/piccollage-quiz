@@ -21,8 +21,14 @@ class Database {
       .catch((err) => console.error('PostgreSQL: Connection error'));
   }
 
-  query(...query) {
-    return this.client.query(...query);
+  close() {
+    this.client.end();
+  }
+
+  query(query, params=[]) {
+    return this.client
+      .query(query, params)
+      .catch((err) => {});
   }
 
   getRestaurants() {

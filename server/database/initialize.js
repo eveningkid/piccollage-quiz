@@ -5,7 +5,7 @@ const util = require('./util');
 
 const database = new Database(config.database);
 
-database.connect(async () => {
+(async () => {
   try {
     util.info('Dropping table `restaurants` (if exists)');
     const dropTable = await database.query('DROP TABLE IF EXISTS restaurants');
@@ -29,9 +29,7 @@ database.connect(async () => {
     ));
 
     util.success('Database successfully bootstrapped!');
-
-    database.close();
   } catch (e) {
     util.error('Error when bootstrapping database');
   }
-});
+})();

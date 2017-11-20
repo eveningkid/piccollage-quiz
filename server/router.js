@@ -1,15 +1,27 @@
 const { Router } = require('express');
 const bodyParser = require('body-parser');
 
-const router = Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-router.get('/', (req, res) => {
-  res.send('Hello World');
-});
+/**
+ * Create an Express router without importing the database configuration
+ * Use a given database instance instead
+ * @param {Database} database
+ * @return {express.Router}
+ */
+function routerWithDatabase(database) {
+  const router = Router();
 
-router.post('/restaurants', urlencodedParser, (req, res) => {
-  res.json({ restaurants: [] });
-});
+  router.get('/', (req, res) => {
+    res.send('Hello World');
+  });
 
-module.exports = router;
+  router.post('/restaurants', urlencodedParser, async (req, res) => {
+    const results = await database.query('SELECT * FROM restaurants');
+    res.json({ restaurants: results.rows });
+  });
+
+  return router;
+}
+
+module.exports = routerWithDatabase;

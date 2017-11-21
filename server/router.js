@@ -17,8 +17,21 @@ function routerWithDatabase(database) {
   });
 
   router.post('/restaurants', urlencodedParser, async (req, res) => {
-    const results = await database.query('SELECT * FROM restaurants');
-    res.json({ restaurants: results.rows });
+    const timestamp = req.body.timestamp;
+
+    if (!timestamp) {
+      res.status(400).json({
+        error: 'Bad request',
+        message: 'Expected a `timestamp` key (e.g. 1511257188893)',
+      });
+    }
+
+    try {
+      const restaurants = await database.getOpenRestaurantsByTimestamp(timestamp);
+      res.status(200).json(restaurants);
+    } catch (message) {
+      res.status(400).json({ error: 'Bad request', message });
+    }
   });
 
   return router;

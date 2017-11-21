@@ -15,6 +15,10 @@ ansi-styles@^3.1.0:
   dependencies:
     color-convert "^1.9.0"
 
+args-parser@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/args-parser/-/args-parser-1.1.0.tgz#6253bfcd694d279fe63eaafd78d628d14a05ffa9"
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"

@@ -6,6 +6,7 @@
   "author": "eveningkid <arn.dellinger@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "args-parser": "^1.1.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.0",
     "express": "^4.16.2",

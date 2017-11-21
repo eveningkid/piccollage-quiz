@@ -1,4 +1,5 @@
 const path = require('path');
+const args = require('args-parser')(process.argv);
 const Database = require('./client');
 const config = require('../../config.json');
 const util = require('./util');
@@ -20,7 +21,8 @@ const database = new Database(config.database);
     `);
 
     util.info('Importing sample data');
-    const entries = await util.importSample(path.join(__dirname, './sample.txt'))
+    const filePath = args.samplePath || path.join(__dirname, './sample.txt');
+    const entries = await util.importSample(filePath);
 
     util.info('Inserting entries');
     entries.forEach(({ name, hours }) => {

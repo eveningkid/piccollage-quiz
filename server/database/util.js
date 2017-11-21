@@ -9,9 +9,14 @@ const fs = require('fs');
  */
 function importSample(path) {
   return new Promise((resolve, reject) => {
+    if (typeof path !== 'string') {
+      error(`Given sample path isn't a valid string`);
+      reject([]);
+    }
+
     fs.readFile(path, 'utf8', (err, data) => {
       if (err) {
-        console.error(err);
+        error(err.message);
         reject([]);
       }
 

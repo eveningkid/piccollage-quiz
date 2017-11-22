@@ -2,7 +2,7 @@
   "database": {
     "HOST": "localhost",
     "PORT": 5432,
-    "USER": "local username",
+    "USER": "local username (i.e. $ echo $USERNAME)",
     "PASSWORD": "",
     "DATABASE": "restaurants"
   },

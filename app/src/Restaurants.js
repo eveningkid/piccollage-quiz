@@ -9,7 +9,7 @@ function Restaurants({ restaurants, onDay }) {
   return (
     <div className="Restaurants">
       {restaurants.length ?
-        <div className="Alert Alert--info">{restaurants.length} restaurant(s) are opened at this time!</div> :
+        <div className="Alert Alert--info">{restaurants.length} restaurant(s) are open, hover to see full schedule</div> :
         <div className="Alert Alert--error">No results! Try another time/day.</div>
       }
 

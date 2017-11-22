@@ -1,5 +1,6 @@
-const { Router } = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = bodyParser.json();
@@ -11,19 +12,17 @@ const jsonParser = bodyParser.json();
  * @return {express.Router}
  */
 function routerWithDatabase(database) {
-  const router = Router();
+  const router = express.Router();
 
-  router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    next();
-  });
+  // Setup static files folder
+  const staticPath = path.join(__dirname, '../app/build');
+  router.use(express.static(staticPath));
 
-  router.get('/', (req, res) => {
-    res.send('Hello World');
-  });
+  // Main route
+  const entryFilePath = path.join(__dirname, '../app/build/index.html');
+  router.get('/', (req, res) => res.sendFile(entryFilePath));
 
+  // API: get open restaurants
   router.post('/restaurants', jsonParser, async (req, res) => {
     const timestamp = req.body.timestamp;
 

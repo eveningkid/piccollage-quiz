@@ -1,5 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+/*
+  Obviously, I would have used sass if I had more time.
+  The following css file then contains some redunduncy,
+  and lack of organization as every component style is mixed there.
+  I also prefered not using js-in-css as a matter of time as well.
+*/
+
 body {
+  padding: 30px;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.App {
+  display: flex;
+  margin: auto;
+}
+
+.Search {
+  flex: 1;
+  padding-right: 30px;
+}
+
+.Search h1 {
+  margin: 0;
+  padding: 8px;
+  font-size: 12px;
+  background-color: rgb(245, 245, 245);
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.SearchResults {
+  flex: 4;
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.SearchResults--fetched {
+  opacity: 1;
+}
+
+.HourCouple {
+  padding: 4px;
+  width: 120px;
+  text-align: center;
+}
+
+.HourCouple--disabled {
+  color: #ccc;
+}
+
+.HourCouple--selected {
+  font-weight: 700;
+  background-color: rgb(245, 245, 245);
+  border-radius: 4px;
+}
+
+.Alert {
+  padding: 10px;
+  font-size: 11px;
+  color: #333;
+  box-sizing: content-box;
+  border-top: 2px solid;
+  font-weight: 700;
+}
+
+.Alert--info {
+  background-color: #e0f5f5;
+  border-top-color: #47c1bf;
+}
+
+.Alert--error {
+  background-color: #fcf1cd;
+  border-top-color: #eec200;
+}
+
+.Restaurants {
+  border: 1px solid #eee;
+  box-shadow: 0 1px 3px 0px rgba(0,0,0,0.08);
+  border-radius: 0 0 4px 4px;
+  max-width: 700px;
+}
+
+.Restaurant {
+  padding: 20px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.Restaurant:hover h1 {
+  margin-bottom: 20px;
+}
+
+.Restaurant:hover .Restaurant_hours {
+  height: 70px;
+  opacity: 1;
+}
+
+.Restaurant:last-child {
+  border-bottom: 0;
+}
+
+.Restaurant h1 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.Restaurant_hours {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 12px;
+  height: 0;
+  opacity: 0;
+  transition: all 250ms;
+  display: flex;
+  align-items: center;
+}
+
+.Restaurant_opened {
+  float: right;
+  font-size: 11px;
+  height: 16px;
+  background-color: #e0f5f5;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #222;
+}
+
+.Picker {
+  margin-bottom: 10px;
+}
+
+.Picker * {
+  font-family: inherit !important;
+  font-size: 12px !important;
 }

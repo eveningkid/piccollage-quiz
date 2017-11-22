@@ -1,10 +1,11 @@
 {
-  "name": "Piccollage Quiz Front-end",
+  "name": "piccollage-quiz-front-end",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-kronos": "^1.6.0",
     "react-scripts": "1.0.17"
   },
   "scripts": {

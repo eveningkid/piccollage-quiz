@@ -59,23 +59,10 @@ class Database {
     });
   }
 
-  // Return a list of open restaurants given a timestamp
-  getOpenRestaurantsByTimestamp(timestamp) {
+  // Return a list of open restaurants given a day and time
+  getOpenRestaurantsByDate(day, time) {
     return new Promise((resolve, reject) => {
-      timestamp = parseInt(timestamp, 10);
-
-      const date = new Date(timestamp);
-      const weekdayIndex = date.getDay();
-      const day = util.indexToWeekDay(weekdayIndex);
-
-      if (isNaN(weekdayIndex)) {
-        reject('Given timestamp is incorrect');
-      }
-
-      // Given a timestamp, we get how many minutes were spent on that day
-      // In order to query `restaurants`
-      const timeString = `${date.getHours()}:${date.getMinutes()}`;
-      const minutes = util.hoursToMinutes(timeString);
+      const minutes = util.hoursToMinutes(time);
 
       this
         .query(`
@@ -94,7 +81,6 @@ class Database {
           });
 
           resolve({
-            fromTime: timeString,
             onDay: day,
             restaurants: results.rows,
           });

@@ -86,33 +86,9 @@ function success(text) {
   console.error(chalk.green(text));
 }
 
-/**
- * Object for days' codes, according to each weekday index
- * 1 => 'mon'
- */
-const dayCodes = {
-  1: 'mon',
-  2: 'tue',
-  3: 'wed',
-  4: 'thu',
-  5: 'fri',
-  6: 'sat',
-  7: 'sun',
-};
-
-/**
- * Util returning a week day given
- * @param {number} index Index from 1~7
- * @return {string}
- */
-function indexToWeekDay(index) {
-  return dayCodes[index];
-}
-
 module.exports.importSample = importSample;
 module.exports.hoursToMinutes = hoursToMinutes;
 module.exports.minutesToString = minutesToString;
 module.exports.info = info;
 module.exports.error = error;
 module.exports.success = success;
-module.exports.indexToWeekDay = indexToWeekDay;

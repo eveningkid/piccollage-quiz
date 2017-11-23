@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Search from './Search';
 import Restaurants from './Restaurants';
 import { API_URL } from './constants';
+import { indexToWeekDay } from './util';
 
 /**
  * Main Renderer
@@ -33,9 +34,22 @@ class App extends Component {
     // Reset the error field
     this.setState({ error: '', isFetching: true });
 
+    const { datetime } = this.state;
+    const weekdayIndex = datetime.getDay();
+    const day = indexToWeekDay(weekdayIndex);
+
+    // Given a timestamp, we get how many minutes were spent on that day
+    // In order to query `restaurants`
+    const hours = datetime.getHours();
+    const hoursText = hours.toFixed().length > 1 ? hours : '0' + hours;
+    const minutes = datetime.getMinutes();
+    const minutesText = minutes.toFixed().length > 1 ? minutes : '0' + minutes;
+    const time = hoursText + ':' + minutesText;
+
     // Prepare the POST request (payload, configuration)
     const payload = {
-      timestamp: this.state.datetime.getTime(),
+      time,
+      day,
     };
 
     const requestConfig = {
@@ -58,7 +72,7 @@ class App extends Component {
         this.setState({ results, gotResponse: true, isFetching: false });
       })
       .catch((error) => {
-        this.setState({ error, isFetching: false });
+        this.setState({ error: error.message, isFetching: false });
       });
   }
 

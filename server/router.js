@@ -18,23 +18,30 @@ function routerWithDatabase(database) {
   const staticPath = path.join(__dirname, '../app/build');
   router.use(express.static(staticPath));
 
+  // Allow CORS
+  router.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    next();
+  });
+
   // Main route
   const entryFilePath = path.join(__dirname, '../app/build/index.html');
   router.get('/', (req, res) => res.sendFile(entryFilePath));
 
   // API: get open restaurants
   router.post('/restaurants', jsonParser, async (req, res) => {
-    const timestamp = req.body.timestamp;
+    const { day, time } = req.body;
 
-    if (!timestamp) {
+    if (!day || !time) {
       return res.status(400).json({
         error: 'Bad request',
-        message: 'Expected a `timestamp` key (e.g. 1511257188893)',
+        message: 'Expected a `day` and `minutes` keys (e.g. `mon` and `240`)',
       });
     }
 
     try {
-      const restaurants = await database.getOpenRestaurantsByTimestamp(timestamp);
+      const restaurants = await database.getOpenRestaurantsByDate(day, time);
       res.status(200).json(restaurants);
     } catch (message) {
       res.status(400).json({ error: 'Bad request', message });

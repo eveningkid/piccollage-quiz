@@ -19,7 +19,7 @@ CREATE TABLE restaurants (
 );
 ```
 
-Another detail is that, for *.hours.day.time*, instead of saving the given string such as "7:00", I'm saving the sum of minutes that this time results in, e.g. `7:00` becomes `7 * 60 = 420`. I changed this in order to easily apply the `where` clause later: as I request a `timestamp` from the front-end when the user is asked about a day+time, I want to easily compare this timestamp's total minutes sum with each restaurant's opening hours. Comparing `7:00` with `420` on the other hand would have been more difficult so I changed this as soon as we feed the database.  
+Another detail is that, for *.hours.day.time*, instead of saving the given string such as "7:00", I'm saving the sum of minutes that this time results in, e.g. `7:00` becomes `7 * 60 = 420`. I changed this in order to easily apply the `where` clause later: I want to easily compare the total minutes sum from the time sent by the user with each restaurant's opening hours. Comparing `7:00` with `420` on the other hand would have been more difficult so I changed this as soon as we feed the database.  
 However, when the results —the open restaurants— are pulled from the database, I restore its initial value to use it directly inside the view (so the view actually gets `7:00`).
 
 #### HTTP Server
@@ -107,7 +107,7 @@ You now need to go inside the `app` folder, install modules and start your first
 cd app && yarn install
 yarn build
 ```
-More informations about the front-end application cand be found in `app/README.md`.  
+More informations about the front-end application can be found in `app/README.md`.  
 
 Finally, come back to the project's root and start the server:
 ```

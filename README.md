@@ -25,7 +25,7 @@ However, when the results —the open restaurants— are pulled from the databas
 #### HTTP Server
 The Express application exposes two endpoints:
 - `/`: index that displays front-end build `index.html` file (located in `app/build/index.html` **after using `yarn install && yarn build` in `app`**)
-- `/restaurants`: return a list of open restaurants when given a timestamp through a POST request
+- `/restaurants`: return a list of open restaurants when given a day and a time ('mon', '7:00') through a POST request
 
 ### Front-end
 I tried to keep it as light as possible. After changing date and/or time, the application will send a POST request sending the associated timestamp.
